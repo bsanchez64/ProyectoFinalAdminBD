@@ -1,0 +1,13 @@
+planta,operador,fuente_codigo,departamento,municipio,capacidad_mw,vigencia_desde,estado
+Hidroituango,EPM,AGUA,Antioquia,Ituango,,,
+San Carlos,ISAGEN,AGUA,Antioquia,San Carlos,,,
+Sogamoso,ISAGEN,AGUA,Santander,Betulia,,,
+Guavio,Enel Colombia,AGUA,Cundinamarca,Ubalá,,,
+Chivor,AES Colombia,AGUA,Boyacá,Santa María,,,
+Betania,Enel Colombia,AGUA,Huila,Yaguará,,,
+El Quimbo,Enel Colombia,AGUA,Huila,Gigante,,,
+Termozipa,Enel Colombia,CARBON,Cundinamarca,Tocancipá,,,
+Gecelca 3,Gecelca,CARBON,Córdoba,Puerto Libertador,,,
+Termosierra,EPM,GAS,Antioquia,Puerto Nare,,,
+Jepírachi,EPM,VIENTO,La Guajira,Uribia,,,
+El Paso,Enel Colombia,RAD SOLAR,Cesar,El Paso,,,

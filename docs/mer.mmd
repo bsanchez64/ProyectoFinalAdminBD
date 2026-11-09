@@ -1,0 +1,72 @@
+erDiagram
+    categoria_fuente ||--o{ fuente_energia : clasifica
+    fuente_energia ||--o{ generacion_mensual : genera
+    periodo ||--o{ generacion_mensual : en
+    fuente_energia ||--o{ planta : usa
+    operador ||--o{ operacion_planta : opera
+    planta ||--o{ operacion_planta : "es operada"
+    planta ||--o{ mantenimiento_planta : tiene
+    planta ||--o{ sensor : tiene
+    sensor ||--o{ lectura_sensor : registra
+    fuente_energia |o--o{ zona_climatica : relacionada
+    zona_climatica ||--o{ clima_mensual : mide
+    periodo ||--o{ clima_mensual : en
+
+    categoria_fuente { smallint id PK
+        varchar nombre UK "RENOVABLE | NO RENOVABLE" }
+    fuente_energia { smallint id PK
+        varchar codigo UK
+        varchar nombre
+        varchar tecnologia "CHECK"
+        smallint categoria_id FK }
+    periodo { int id PK
+        smallint anio "CHECK 2000-2100"
+        smallint mes "CHECK 1-12"
+        date fecha_inicio
+        smallint dias_mes }
+    generacion_mensual { bigint id PK
+        smallint fuente_id FK
+        int periodo_id FK
+        numeric promedio_gwh
+        numeric maximo_gwh
+        numeric minimo_gwh
+        numeric total_gwh "trigger R1"
+        numeric pct_participacion "trigger R2" }
+    operador { int id PK
+        varchar nombre UK
+        varchar nit UK }
+    planta { int id PK
+        varchar nombre UK
+        smallint fuente_id FK
+        varchar departamento
+        varchar municipio
+        numeric capacidad_mw
+        varchar estado "CHECK" }
+    operacion_planta { int id PK
+        int planta_id FK
+        int operador_id FK
+        daterange vigencia "EXCLUDE" }
+    mantenimiento_planta { int id PK
+        int planta_id FK
+        tstzrange ventana "EXCLUDE"
+        varchar tipo }
+    zona_climatica { smallint id PK
+        varchar nombre UK
+        numeric latitud
+        numeric longitud
+        smallint fuente_relacionada_id FK }
+    clima_mensual { bigint id PK
+        smallint zona_id FK
+        int periodo_id FK
+        numeric precipitacion_mm
+        numeric radiacion_mj_m2
+        numeric viento_max_kmh }
+    sensor { int id PK
+        int planta_id FK
+        varchar tipo
+        varchar estado "CHECK" }
+    lectura_sensor { bigint id PK
+        int sensor_id FK
+        timestamptz fecha_hora
+        numeric valor
+        varchar calidad "trigger R3" }
