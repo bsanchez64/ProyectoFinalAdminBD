@@ -81,11 +81,13 @@ FROM staging.operadores_plantas_csv s
 JOIN fuente_energia f ON f.codigo = trim(s.fuente_codigo)
 ON CONFLICT (nombre) DO NOTHING;
 
--- Vigencia abierta desde la fecha del CSV. Si la columna esta vacia se usa
--- 2000-01-01 (inicio del dataset): REEMPLAZAR por la fecha real de PARATEC.
+-- Vigencia desde la FPO de PARATEC hasta vigencia_hasta (vacia = sigue operando).
+-- Si vigencia_desde esta vacia se usa 2000-01-01 (inicio del dataset).
+-- Una planta RETIRADA debe traer vigencia_hasta, o la regla R4 rechaza la fila.
 INSERT INTO operacion_planta (planta_id, operador_id, vigencia)
 SELECT pl.id, o.id,
-       daterange(COALESCE(NULLIF(trim(s.vigencia_desde), '')::date, '2000-01-01'), NULL, '[)')
+       daterange(COALESCE(NULLIF(trim(s.vigencia_desde), '')::date, '2000-01-01'),
+                 NULLIF(trim(s.vigencia_hasta), '')::date, '[)')
 FROM staging.operadores_plantas_csv s
 JOIN planta   pl ON pl.nombre = trim(s.planta)
 JOIN operador o  ON o.nombre  = trim(s.operador)

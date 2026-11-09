@@ -11,7 +11,7 @@ SET search_path TO energia, public;
 \set desde '2024-01-01'
 \set hasta '2026-08-31 23:59'
 
--- 1. Sensores: POTENCIA en todas las plantas + uno segun la tecnologia
+-- 1. Sensores: POTENCIA en todas las plantas activas + uno segun la tecnologia
 INSERT INTO sensor (planta_id, tipo, instalado_en)
 SELECT p.id, t.tipo, DATE '2023-12-01'
 FROM planta p
@@ -23,6 +23,7 @@ CROSS JOIN LATERAL (VALUES
                        WHEN 'SOLAR'      THEN 'RADIACION'
                        ELSE 'TEMPERATURA' END)
 ) AS t(tipo)
+WHERE p.estado <> 'RETIRADA'          -- una planta retirada no tiene telemetria
 ON CONFLICT (planta_id, tipo) DO NOTHING;
 
 -- 2. Mantenimientos: 2 paradas preventivas por planta (no se solapan)
@@ -36,7 +37,8 @@ CROSS JOIN LATERAL (VALUES
     (TIMESTAMPTZ '2024-03-01' + (p.id * interval '5 days')),
     (TIMESTAMPTZ '2025-09-01' + (p.id * interval '4 days'))
 ) AS v(ini)
-WHERE NOT EXISTS (SELECT 1 FROM mantenimiento_planta m WHERE m.planta_id = p.id);
+WHERE p.estado <> 'RETIRADA'
+  AND NOT EXISTS (SELECT 1 FROM mantenimiento_planta m WHERE m.planta_id = p.id);
 
 -- 3. Telemetria masiva. Se desactiva el trigger R3 SOLO durante esta carga
 --    historica (equivale a un bulk load); las ventanas de mantenimiento se

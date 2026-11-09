@@ -7,7 +7,7 @@ Administración de Bases de Datos (ED1302) · PostgreSQL local + AWS RDS.
 ```
 data/raw/generacion_por_fuente.csv  Fuente 1 (CSV)  - datos.gov.co, 2.786 filas, ene-2000 a ago-2026
 data/raw/clima_*.json               Fuente 2 (JSON) - API Open-Meteo, la crea etl/clima.py
-data/raw/operadores_plantas.csv     Fuente 3 (maestra) - plantas y operadores (completar con PARATEC/XM)
+data/raw/operadores_plantas.csv     Fuente 3 (maestra) - plantas y operadores (datos de PARATEC/XM)
 docs/mer.png, docs/mer.mmd          Diagrama entidad-relación
 etl/clima.py                        Descarga el clima y lo carga en staging.clima_json
 sql/00_setup.sql                    Extensión btree_gist + esquemas staging y energia
@@ -65,8 +65,9 @@ Para empezar de cero: `dropdb -U postgres energia_co` y repetir.
 
 ## Pendientes antes de la Entrega 1
 
-- Completar `capacidad_mw`, `vigencia_desde` y `estado` en `data/raw/operadores_plantas.csv` con datos de PARATEC (XM).
-  Mientras estén vacíos, la vigencia se carga desde 2000-01-01.
+- `data/raw/operadores_plantas.csv` tiene 13 plantas con capacidad, fecha de puesta en operación (FPO) y estado tomados de PARATEC (XM) el 09-11-2026.
+  `vigencia_desde` es la FPO de la planta (simplificación: el operador actual pudo llegar después).
+  Termozipa suma sus unidades ZIPAEMG 2 a 5. Jepírachi está RETIRADA (desconectada del SIN el 2023-10-09).
 - Los datos de `05_datos_sinteticos.sql` son generados; decirlo así en el informe.
 
 ## Para la Entrega 2 (AWS RDS)

@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS staging.clima_json (
 DROP TABLE IF EXISTS staging.operadores_plantas_csv;
 CREATE TABLE staging.operadores_plantas_csv (
     planta TEXT, operador TEXT, fuente_codigo TEXT, departamento TEXT,
-    municipio TEXT, capacidad_mw TEXT, vigencia_desde TEXT, estado TEXT
+    municipio TEXT, capacidad_mw TEXT, vigencia_desde TEXT, vigencia_hasta TEXT, estado TEXT
 );
 \copy staging.operadores_plantas_csv FROM 'data/raw/operadores_plantas.csv' WITH (FORMAT csv, HEADER true, ENCODING 'UTF8')
 

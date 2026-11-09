@@ -1,13 +1,14 @@
-planta,operador,fuente_codigo,departamento,municipio,capacidad_mw,vigencia_desde,estado
-Hidroituango,EPM,AGUA,Antioquia,Ituango,,,
-San Carlos,ISAGEN,AGUA,Antioquia,San Carlos,,,
-Sogamoso,ISAGEN,AGUA,Santander,Betulia,,,
-Guavio,Enel Colombia,AGUA,Cundinamarca,Ubalá,,,
-Chivor,AES Colombia,AGUA,Boyacá,Santa María,,,
-Betania,Enel Colombia,AGUA,Huila,Yaguará,,,
-El Quimbo,Enel Colombia,AGUA,Huila,Gigante,,,
-Termozipa,Enel Colombia,CARBON,Cundinamarca,Tocancipá,,,
-Gecelca 3,Gecelca,CARBON,Córdoba,Puerto Libertador,,,
-Termosierra,EPM,GAS,Antioquia,Puerto Nare,,,
-Jepírachi,EPM,VIENTO,La Guajira,Uribia,,,
-El Paso,Enel Colombia,RAD SOLAR,Cesar,El Paso,,,
+planta,operador,fuente_codigo,departamento,municipio,capacidad_mw,vigencia_desde,vigencia_hasta,estado
+Hidroituango,EPM,AGUA,Antioquia,Ituango,1200,2022-12-01,,OPERACION
+San Carlos,ISAGEN,AGUA,Antioquia,San Carlos,1240,1984-01-20,,OPERACION
+Sogamoso,ISAGEN,AGUA,Santander,Girón,819,2014-12-20,,OPERACION
+Guavio,Enel Colombia,AGUA,Cundinamarca,Ubalá,1250,1993-03-19,,OPERACION
+Chivor,AES Colombia,AGUA,Boyacá,Santa María,1000,1977-05-23,,OPERACION
+Betania,Enel Colombia,AGUA,Huila,Yaguará,540,1987-11-01,,OPERACION
+El Quimbo,Enel Colombia,AGUA,Huila,Gigante,400,2015-11-16,,OPERACION
+Termozipa,Enel Colombia,CARBON,Cundinamarca,Tocancipá,226,1964-01-01,,OPERACION
+Gecelca 3,Gecelca,CARBON,Córdoba,Puerto Libertador,164,2015-09-17,,OPERACION
+Gecelca 32,Gecelca,CARBON,Córdoba,Puerto Libertador,270,2018-09-28,,OPERACION
+Termosierra,EPM,GAS,Antioquia,Puerto Nare,433,1998-02-07,,OPERACION
+Jepírachi,EPM,VIENTO,La Guajira,Uribia,,,2023-10-09,RETIRADA
+El Paso,Enel Colombia,RAD SOLAR,Cesar,El Paso,70,2024-03-23,,OPERACION
